@@ -1,12 +1,12 @@
-import streamlit as str_app
+import streamlit as st
 
 # 페이지 설정
-str_app.set_page_config(
+st.set_page_config(
     page_title="군필.GG - 대한민국 장병/연예인 전적 검색", page_icon="🪖", layout="wide"
 )
 
-# 커스텀 CSS (특수부대 금색 테두리, 명예의 전당, 쩌리의 전당, 면제의 전당 스타일)
-str_app.markdown(
+# 커스텀 CSS (세로 정렬 및 각 전당 카드 스타일링)
+st.markdown(
     """
     <style>
     .branch-box {
@@ -62,11 +62,11 @@ str_app.markdown(
 )
 
 # 상단 타이틀
-str_app.title("🪖 군필.GG (Gunpil.GG)")
-str_app.caption("대한민국 국군 장병 및 연예인 복무 전적 검색 플랫폼")
-str_app.markdown("---")
+st.title("🪖 군필.GG (Gunpil.GG)")
+st.caption("대한민국 국군 장병 및 연예인 복무 전적 검색 플랫폼")
+st.markdown("---")
 
-# 샘플 데이터베이스 (표민석, 김다솔, 박성진, 저스디스, 스윙스, 유승준 포함)
+# 샘플 데이터베이스
 soldier_database = {
     "14-70123456": {
         "name": "표민석",
@@ -140,20 +140,20 @@ soldier_database = {
 }
 
 # 탭 메뉴 구성
-tab1, tab2, tab3 = str_app.tabs(
-    ["🏆 명예의 전당 & 전당들", "🔍 전적 검색 (군번)", "🌟 연예인 복무 랭킹/현황판"]
+tab1, tab2, tab3 = st.tabs(
+    ["🏆 명예/쩌리/면제의 전당", "🔍 전적 검색 (군번)", "🌟 연예인 복무 랭킹/현황판"]
 )
 
 with tab1:
-  str_app.subheader("🏆 명예의 전당 & 🥔 쩌리의 전당 & 🚫 면제의 전당")
-  str_app.write(
-      "국군 최고의 전사들부터 꿀보직 인물들, 그리고 각종 사유로 군대를"
-      " 비켜간(혹은 비켜난) 인물들의 전당입니다."
+  st.subheader("🏛️ 군필.GG 종합 전당 (세로 뷰)")
+  st.write(
+      "국군 최고의 전사들부터 꿀보직, 그리고 면제자들까지 한 화면에서 세로로"
+      " 쭉 확인할 수 있습니다."
   )
 
-  # 명예의 전당 (표민석)
-  str_app.markdown("### 🌟 명예의 전당 (Hall of Fame)")
-  str_app.markdown(
+  # 1. 명예의 전당 섹션
+  st.markdown("### 🌟 1. 명예의 전당 (Hall of Fame)")
+  st.markdown(
       """
         <div class="hof-card">
             <h3 style="color: #d32f2f; margin-top: 0;">🔥 [전설의 용사] 표민석 병장</h3>
@@ -165,9 +165,9 @@ with tab1:
       unsafe_allow_html=True,
   )
 
-  # 쩌리의 전당 (김다솔, 박성진)
-  str_app.markdown("### 🥔 쩌리의 전당 (Hall of JJUL)")
-  str_app.markdown(
+  # 2. 쩌리의 전당 섹션
+  st.markdown("### 🥔 2. 쩌리의 전당 (Hall of JJUL)")
+  st.markdown(
       """
         <div class="jjul-card">
             <h3 style="color: #616161; margin-top: 0;">💤 [관상용 용사] 김다솔 병장</h3>
@@ -178,7 +178,7 @@ with tab1:
         """,
       unsafe_allow_html=True,
   )
-  str_app.markdown(
+  st.markdown(
       """
         <div class="jjul-card">
             <h3 style="color: #616161; margin-top: 0;">🍩 [냉동 파괴자] 박성진 병장</h3>
@@ -190,9 +190,9 @@ with tab1:
       unsafe_allow_html=True,
   )
 
-  # 면제의 전당 (저스디스, 스윙스, 유승준)
-  str_app.markdown("### 🚫 면제의 전당 (Hall of Exemption)")
-  str_app.markdown(
+  # 3. 면제의 전당 섹션
+  st.markdown("### 🚫 3. 면제의 전당 (Hall of Exemption)")
+  st.markdown(
       """
         <div class="exempt-card">
             <h3 style="color: #37474f; margin-top: 0;">🎤 [면제 힙합퍼] 저스디스</h3>
@@ -203,7 +203,7 @@ with tab1:
         """,
       unsafe_allow_html=True,
   )
-  str_app.markdown(
+  st.markdown(
       """
         <div class="exempt-card">
             <h3 style="color: #37474f; margin-top: 0;">🏋️ [조기전역의 아이콘] 스윙스</h3>
@@ -214,7 +214,7 @@ with tab1:
         """,
       unsafe_allow_html=True,
   )
-  str_app.markdown(
+  st.markdown(
       """
         <div class="exempt-card">
             <h3 style="color: #37474f; margin-top: 0;">✈️ [레전드 귀화] 유승준 (Steve Yoo)</h3>
@@ -227,46 +227,46 @@ with tab1:
   )
 
 with tab2:
-  str_app.subheader("장병 및 연예인 군번 통합 검색")
-  str_app.write("군번을 입력해 실시간 복무 전적과 타이틀을 조회합니다.")
-  str_app.info(
+  st.subheader("장병 및 연예인 군번 통합 검색")
+  st.write("군번을 입력해 실시간 복무 전적과 타이틀을 조회합니다.")
+  st.info(
       "💡 **추천 테스트 군번**: `14-70123456` (표민석), `18-70555555`"
       " (김다솔), `19-70666666` (박성진), `00-00000001` (저스디스)"
   )
 
-  col_search1, col_search2 = str_app.columns([3, 1])
+  col_search1, col_search2 = st.columns([3, 1])
   with col_search1:
-    search_id = str_app.text_input(
+    search_id = st.text_input(
         "군번 입력",
         placeholder="예: 14-70123456 또는 00-00000001",
         label_visibility="collapsed",
     )
   with col_search2:
-    search_btn = str_app.button("전적 검색", use_container_width=True)
+    search_btn = st.button("전적 검색", use_container_width=True)
 
   if search_btn or search_id:
     if search_id in soldier_database:
       info = soldier_database[search_id]
-      str_app.success(f"성공! '{info['name']}'님의 전적 데이터 로드 완료.")
+      st.success(f"성공! '{info['name']}'님의 전적 데이터 로드 완료.")
 
-      c1, c2, c3 = str_app.columns([1, 2, 2])
+      c1, c2, c3 = st.columns([1, 2, 2])
       with c1:
-        str_app.image(info["img"], width=120)
+        st.image(info["img"], width=120)
       with c2:
-        str_app.markdown(f"### {info['name']}")
-        str_app.write(f"🏷️ **소속/군종**: {info['branch']}")
-        str_app.write(f"🎖️ **계급**: {info['rank']}")
+        st.markdown(f"### {info['name']}")
+        st.write(f"🏷️ **소속/군종**: {info['branch']}")
+        st.write(f"🎖️ **계급**: {info['rank']}")
         if "title" in info:
-          str_app.markdown(f"🔥 **특별 칭호**: {info['title']}")
+          st.markdown(f"🔥 **특별 칭호**: {info['title']}")
       with c3:
-        str_app.metric(label="복무 상태", value=info["status"])
-        str_app.write(f"🏢 **부대**: {info['unit']}")
-        str_app.write(f"📅 **기간**: {info['period']}")
+        st.metric(label="복무 상태", value=info["status"])
+        st.write(f"🏢 **부대**: {info['unit']}")
+        st.write(f"📅 **기간**: {info['period']}")
     elif search_id:
-      str_app.warning("등록되지 않은 군번입니다. 상단의 테스트 군번을 확인해 보세요!")
+      st.warning("등록되지 않은 군번입니다. 상단의 테스트 군번을 확인해 보세요!")
 
 with tab3:
-  str_app.subheader("🌟 부대별 연예인 복무 현황판")
+  st.subheader("🌟 부대별 연예인 복무 현황판")
   celebrity_board = {
       "육군": [
           {"name": "김석진 (진)", "unit": "제5보병사단 조교"},
@@ -285,29 +285,29 @@ with tab3:
           {"name": "지진희", "unit": "공군 자원입대"},
       ],
   }
-  selected_cat = str_app.selectbox(
+  selected_cat = st.selectbox(
       "조회할 부대/군종 선택", list(celebrity_board.keys())
   )
   for celeb in celebrity_board[selected_cat]:
-    str_app.info(f"👤 **{celeb['name']}** — 소속: {celeb['unit']}")
+    st.info(f"👤 **{celeb['name']}** — 소속: {celeb['unit']}")
 
-# 메인 화면 하단: 부대 마크 그리드 (특수부대 금색 테두리)
-str_app.markdown("---")
-str_app.subheader("🛡️ 대한민국 국군 부대 & 전당 바로가기")
+# 메인 화면 하단: 부대 마크 그리드
+st.markdown("---")
+st.subheader("🛡️ 대한민국 국군 부대 & 전당 바로가기")
 
-grid_cols = str_app.columns(5)
+grid_cols = st.columns(5)
 branches_data = [
     {"name": "육군 (ROKA)", "icon": "🛡️", "special": False},
     {"name": "해병대 (ROKMC)", "icon": "⚓", "special": False},
     {"name": "특수부대 (SWC)", "icon": "⭐", "special": True},
     {"name": "공군 (ROKAF)", "icon": "✈️", "special": False},
-    {"name": "명예/쩌리/면제", "icon": "🏛️", "special": True},
+    {"name": "종합 전당 세로뷰", "icon": "🏛️", "special": True},
 ]
 
 for idx, branch in enumerate(branches_data):
   with grid_cols[idx]:
     if branch["special"]:
-      str_app.markdown(
+      st.markdown(
           f"""
             <div class="branch-box special-gold">
                 <div style="font-size: 35px;">{branch['icon']}</div>
@@ -318,7 +318,7 @@ for idx, branch in enumerate(branches_data):
           unsafe_allow_html=True,
       )
     else:
-      str_app.markdown(
+      st.markdown(
           f"""
             <div class="branch-box">
                 <div style="font-size: 35px;">{branch['icon']}</div>
