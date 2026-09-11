@@ -11,9 +11,7 @@ if "board_posts" not in st.session_state:
       {
           "writer": "표민석",
           "title": "유격 훈련 꿀팁 공유한다",
-          "content": (
-              "화이팅입니다. 각개전투 할 때 무조건 무릎 보호대 두 개 차세요."
-          ),
+          "content": "화이팅입니다. 각개전투 할 때 무조건 무릎 보호대 두 개 차세요.",
       },
       {
           "writer": "김다솔",
@@ -30,7 +28,7 @@ if "votes" not in st.session_state:
       "px_combo": {"슈냉(슈프림치킨 + 냉동볶음밥)": 2500, "맛다시 + 참치 + 밥 (비빔밥)": 2300, "냉동삼겹살 + 불닭볶음면": 1980, "몽쉘 + 딸기잼 + 우유 (군대리아 업그레이드)": 1450}
   }
 
-# 커스텀 CSS (카드 디자인 및 스타일링)
+# 커스텀 CSS (카드 디자인 및 텍스트 가독성 개선)
 st.markdown(
     """
     <style>
@@ -58,6 +56,7 @@ st.markdown(
         background: linear-gradient(135deg, #fff5f5 0%, #ffe3e3 100%);
         box-shadow: 0 4px 15px rgba(255, 75, 75, 0.2);
         margin-bottom: 20px;
+        color: #2b2b2b !important;
     }
     .jjul-card {
         border: 3px solid #9e9e9e;
@@ -66,6 +65,7 @@ st.markdown(
         background: linear-gradient(135deg, #f1f1f1 0%, #e0e0e0 100%);
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         margin-bottom: 20px;
+        color: #2b2b2b !important;
     }
     .exempt-card {
         border: 3px solid #607d8b;
@@ -74,6 +74,12 @@ st.markdown(
         background: linear-gradient(135deg, #eceff1 0%, #cfd8dc 100%);
         box-shadow: 0 4px 15px rgba(96, 125, 139, 0.2);
         margin-bottom: 20px;
+        color: #2b2b2b !important;
+    }
+    /* 카드 내부 텍스트 가독성을 위한 강제 색상 지정 */
+    .hof-card p, .jjul-card p, .exempt-card p {
+        color: #333333 !important;
+        font-size: 15px;
     }
     .ranking-card {
         border: 2px solid #ffaa00;
@@ -171,7 +177,7 @@ soldier_database = {
     },
 }
 
-# 탭 메뉴 구성 (랭킹 및 게시판 포함 총 5개 탭)
+# 탭 메뉴 구성
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "🏆 종합 전당", 
     "🔍 전적 검색", 
@@ -188,10 +194,10 @@ with tab1:
   st.markdown("### 🌟 1. 명예의 전당 (Hall of Fame)")
   st.markdown("""
         <div class="hof-card">
-            <h3 style="color: #d32f2f; margin-top: 0;">🔥 [전설의 용사] 표민석 병장</h3>
-            <p style="font-size: 15px; font-weight: bold; color: #555;">소속: 육군 수색대대 | 타이틀: <span style="color: #ff8c00;">👑 유격왕</span></p>
+            <h3 style="color: #c62828; margin-top: 0;">🔥 [전설의 용사] 표민석 병장</h3>
+            <p style="font-size: 15px; font-weight: bold; color: #444444;">소속: 육군 수색대대 | 타이틀: <span style="color: #d35400;">👑 유격왕</span></p>
             <hr style="border: 1px solid #ff4b4b;">
-            <p><b>업적:</b> 극한의 유격 훈련을 완벽히 소화하며 부대 내 전설적인 '유격왕' 타이틀 획득. 수색 작전의 에이스.</p>
+            <p style="color: #2b2b2b !important;"><b>업적:</b> 극한의 유격 훈련을 완벽히 소화하며 부대 내 전설적인 '유격왕' 타이틀 획득. 수색 작전의 에이스.</p>
         </div>
         """, unsafe_allow_html=True)
 
@@ -199,18 +205,18 @@ with tab1:
   st.markdown("### 🥔 2. 쩌리의 전당 (Hall of JJUL)")
   st.markdown("""
         <div class="jjul-card">
-            <h3 style="color: #616161; margin-top: 0;">💤 [관상용 용사] 김다솔 병장</h3>
-            <p style="font-size: 15px; font-weight: bold; color: #555;">소속: 육군 | 타이틀: <span style="color: #795548;">💤 건빵 수집가</span></p>
+            <h3 style="color: #424242; margin-top: 0;">💤 [관상용 용사] 김다솔 병장</h3>
+            <p style="font-size: 15px; font-weight: bold; color: #444444;">소속: 육군 | 타이틀: <span style="color: #6d4c41;">💤 건빵 수집가</span></p>
             <hr style="border: 1px solid #9e9e9e;">
-            <p><b>업적:</b> PX 냉동식품 재고 조사 전문. 생활관 침대와 한 몸이 되어 주말마다 사단장급 숙면을 선보인 전설의 인물.</p>
+            <p style="color: #2b2b2b !important;"><b>업적:</b> PX 냉동식품 재고 조사 전문. 생활관 침대와 한 몸이 되어 주말마다 사단장급 숙면을 선보인 전설의 인물.</p>
         </div>
         """, unsafe_allow_html=True)
   st.markdown("""
         <div class="jjul-card">
-            <h3 style="color: #616161; margin-top: 0;">🍩 [냉동 파괴자] 박성진 병장</h3>
-            <p style="font-size: 15px; font-weight: bold; color: #555;">소속: 육군 | 타이틀: <span style="color: #795548;">🍩 냉동식품 마니아</span></p>
+            <h3 style="color: #424242; margin-top: 0;">🍩 [냉동 파괴자] 박성진 병장</h3>
+            <p style="font-size: 15px; font-weight: bold; color: #444444;">소속: 육군 | 타이틀: <span style="color: #6d4c41;">🍩 냉동식품 마니아</span></p>
             <hr style="border: 1px solid #9e9e9e;">
-            <p><b>업적:</b> 야간 경계근무 후 반드시 냉동만두를 흡입하여 체중계 고장을 유발함. 운전병이지만 핸들보다 숟가락이 더 익숙했던 자.</p>
+            <p style="color: #2b2b2b !important;"><b>업적:</b> 야간 경계근무 후 반드시 냉동만두를 흡입하여 체중계 고장을 유발함. 운전병이지만 핸들보다 숟가락이 더 익숙했던 자.</p>
         </div>
         """, unsafe_allow_html=True)
 
@@ -218,26 +224,26 @@ with tab1:
   st.markdown("### 🚫 3. 면제의 전당 (Hall of Exemption)")
   st.markdown("""
         <div class="exempt-card">
-            <h3 style="color: #37474f; margin-top: 0;">🎤 [면제 힙합퍼] 저스디스</h3>
-            <p style="font-size: 15px; font-weight: bold; color: #555;">소속: 면제 | 타이틀: <span style="color: #455a64;">🎤 힙합 국방부 장관</span></p>
+            <h3 style="color: #263238; margin-top: 0;">🎤 [면제 힙합퍼] 저스디스</h3>
+            <p style="font-size: 15px; font-weight: bold; color: #444444;">소속: 면제 | 타이틀: <span style="color: #37474f;">🎤 힙합 국방부 장관</span></p>
             <hr style="border: 1px solid #607d8b;">
-            <p><b>특징:</b> 가사와 랩으로 대한민국 군문화를 평정하려 했으나, 실상은 면제 판정을 받아 리스너들의 놀림거리가 된 전설.</p>
+            <p style="color: #2b2b2b !important;"><b>특징:</b> 가사와 랩으로 대한민국 군문화를 평정하려 했으나, 실상은 면제 판정을 받아 리스너들의 놀림거리가 된 전설.</p>
         </div>
         """, unsafe_allow_html=True)
   st.markdown("""
         <div class="exempt-card">
-            <h3 style="color: #37474f; margin-top: 0;">🏋️ [조기전역의 아이콘] 스윙스</h3>
-            <p style="font-size: 15px; font-weight: bold; color: #555;">소속: 보충역 / 의가사 전역 | 타이틀: <span style="color: #455a64;">🏋️ 정신건강 조기 전역</span></p>
+            <h3 style="color: #263238; margin-top: 0;">🏋️ [조기전역의 아이콘] 스윙스</h3>
+            <p style="font-size: 15px; font-weight: bold; color: #444444;">소속: 보충역 / 의가사 전역 | 타이틀: <span style="color: #37474f;">🏋️ 정신건강 조기 전역</span></p>
             <hr style="border: 1px solid #607d8b;">
-            <p><b>특징:</b> 현역으로 입대하였으나 심리적 사유로 의가사(복무부적합) 전역을 하며 한국 힙합계에 엄청난 밈과 파장을 남김.</p>
+            <p style="color: #2b2b2b !important;"><b>특징:</b> 현역으로 입대하였으나 심리적 사유로 의가사(복무부적합) 전역을 하며 한국 힙합계에 엄청난 밈과 파장을 남김.</p>
         </div>
         """, unsafe_allow_html=True)
   st.markdown("""
         <div class="exempt-card">
-            <h3 style="color: #37474f; margin-top: 0;">✈️ [레전드 귀화] 유승준 (Steve Yoo)</h3>
-            <p style="font-size: 15px; font-weight: bold; color: #555;">소속: 입국금지 | 타이틀: <span style="color: #455a64;">✈️ 아름다운 청년 (거부)</span></p>
+            <h3 style="color: #263238; margin-top: 0;">✈️ [레전드 귀화] 유승준 (Steve Yoo)</h3>
+            <p style="font-size: 15px; font-weight: bold; color: #444444;">소속: 입국금지 | 타이틀: <span style="color: #37474f;">✈️ 아름다운 청년 (거부)</span></p>
             <hr style="border: 1px solid #607d8b;">
-            <p><b>특징:</b> 군대에 간다며 온국민과 약속한 뒤 입대 직전 미국 시민권을 취득하여 대한민국 국적 상실 및 영구 입국 금치 처분을 받은 역사적 인물.</p>
+            <p style="color: #2b2b2b !important;"><b>특징:</b> 군대에 간다며 온국민과 약속한 뒤 입대 직전 미국 시민권을 취득하여 대한민국 국적 상실 및 영구 입국 금치 처분을 받은 역사적 인물.</p>
         </div>
         """, unsafe_allow_html=True)
 
